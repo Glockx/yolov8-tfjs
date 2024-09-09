@@ -49,11 +49,14 @@ const App = () => {
 
   return (
     <div className="App">
-      {loading.loading && <Loader>Loading model... {(loading.progress * 100).toFixed(2)}%</Loader>}
+      {loading.loading && (
+        <Loader>Loading model... {(loading.progress * 100).toFixed(2)}%</Loader>
+      )}
       <div className="header">
         <h1>📷 YOLOv8 Live Detection App</h1>
         <p>
-          YOLOv8 live detection application on browser powered by <code>tensorflow.js</code>
+          YOLOv8 live detection application on browser powered by{" "}
+          <code>tensorflow.js</code>
         </p>
         <p>
           Serving : <code className="code">{modelName}</code>
@@ -64,13 +67,23 @@ const App = () => {
         <img
           src="#"
           ref={imageRef}
-          onLoad={() => detect(imageRef.current, model, canvasRef.current)}
+          onLoad={() => {
+            // Measure Time
+            const startTime = performance.now();
+
+            detect(imageRef.current, model, canvasRef.current);
+
+            const endTime = performance.now();
+            console.log(`Inference took ${endTime - startTime} milliseconds.`);
+          }}
         />
         <video
           autoPlay
           muted
           ref={cameraRef}
-          onPlay={() => detectVideo(cameraRef.current, model, canvasRef.current)}
+          onPlay={() =>
+            detectVideo(cameraRef.current, model, canvasRef.current)
+          }
         />
         <video
           autoPlay
@@ -78,10 +91,18 @@ const App = () => {
           ref={videoRef}
           onPlay={() => detectVideo(videoRef.current, model, canvasRef.current)}
         />
-        <canvas width={model.inputShape[1]} height={model.inputShape[2]} ref={canvasRef} />
+        <canvas
+          width={model.inputShape[1]}
+          height={model.inputShape[2]}
+          ref={canvasRef}
+        />
       </div>
 
-      <ButtonHandler imageRef={imageRef} cameraRef={cameraRef} videoRef={videoRef} />
+      <ButtonHandler
+        imageRef={imageRef}
+        cameraRef={cameraRef}
+        videoRef={videoRef}
+      />
     </div>
   );
 };
