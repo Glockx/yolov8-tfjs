@@ -13,6 +13,9 @@ with `webgl` backend.
 
 **Setup**
 
+1. Install [NodeJS](https://nodejs.org/en)
+2. Install [Yarn](https://yarnpkg.com/)
+
 ```bash
 #Install dependencies
 yarn install
