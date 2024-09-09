@@ -25,7 +25,7 @@ yarn install
 yarn start
 ```
 
-**Use another model**
+# Use another model
 
 Use another YOLOv8 model.
 
@@ -41,14 +41,8 @@ Use another YOLOv8 model.
    model.export(format="tfjs")
    ```
 
-2. Copy `yolov8*_web_model` to `./public`
-3. Update `modelName` in `App.jsx` to new model name
-   ```jsx
-   ...
-   // model configs
-   const modelName = "yolov8*"; // change to new model name
-   ...
-   ```
+2. Delete previous model files in `./public/yolov8n_web_model`
+3. Copy new model's TF.js files to `./public/yolov8n_web_model`
 4. Done! 😊
 
 **Note: Custom Trained YOLOv8 Models**
